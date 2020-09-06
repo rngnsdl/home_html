@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-3.5.1.js"></script>
+
+    <title>Document</title>
+    <style>
+        div{
+            margin:auto;
+        }
+        .div_horserank{
+            width:15%;
+            height: 15%;
+            float: right;
+        }
+        .road {
+            width: 78%;
+            height: 100px;
+            float: left;
+            border: 1px solid #999999;
+            border-right: 9px solid red;
+        }
+        .road_bottom{
+            width: 100%;
+            height: 100px;
+            clear: both;
+            text-align: center;
+        }
+
+
+        .road img {
+            width: 120px;
+            height: 100px;
+            position: absolute;
+            left: 10px;
+
+        }
+
+        money {
+            text-align: center;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            var cnt=0;
+            alert("•주의!!• \n•새로고침시 초기화 됩니다.•");
+            var money = 100000;
+            $("button#start").click(function () {
+
+                $('#start').hide('linear');
+                money -= 10000;
+                $('money').html('<h2>소지금 : ' + money + '원</h2>');
+                // var $horse = $('img');
+                    var x = 0;
+                    var move = setInterval(function () {
+                $('img').each(function (index) {
+                        //--------------
+
+                        console.log(index + ': ' + x);
+                        if (x < 1380) {
+                            var randomIndex = Math.floor(Math.random() * 20);
+                            x += randomIndex;
+                            $("#horse_" + (index + 1)).css({
+                                left: x //css 속성에 left,top 이 있다
+                            })
+                        } else {
+                            cnt++;
+                            clearInterval(move);
+                            $(".div_horserank")+=(cnt+"등");
+                            $('#start').show();
+                        }
+                })
+                    }, 500)
+
+
+
+                $("#stop").click(function () {
+                    clearInterval(move);
+                })
+
+
+            })
+
+
+        })
+    </script>
+</head>
+
+<body>
+
+    <div class="road"><img src="../img/horse.png" alt="" id="horse_1"></div>
+    <div class="div_horserank1"></div>
+    <div class="road"><img src="../img/horse.png" alt="" id="horse_2"></div>
+    <div class="div_horserank2"></div>
+    <div class="road"><img src="../img/horse.png" alt="" id="horse_3"></div>
+    <div class="div_horserank3"></div>
+    <div class="road"><img src="../img/horse.png" alt="" id="horse_4"></div>
+    <div class="div_horserank4"></div>
+    <div class="road"><img src="../img/horse.png" alt="" id="horse_5"></div>
+    <div class="div_horserank5"></div>
+    <div class="road"><img src="../img/horse.png" alt="" id="horse_6"></div>
+    <div class="div_horserank6"></div>
+    <div class="road"><img src="../img/horse.png" alt="" id="horse_7"></div>
+    <div class="div_horserank7"></div>
+    <div class="road"><img src="../img/horse.png" alt="" id="horse_8"></div>
+    <div class="div_horserank8"></div>
+    <div class="div_bottom"></div>
+    <button id="start">시작</button>
+    <button id="stop">종료</button>
+
+
+    <money></money>
+</body>
+
+</html>

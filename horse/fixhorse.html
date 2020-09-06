@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-3.5.1.js"></script>
+
+    <title>Document</title>
+    <style>
+        div {
+            margin-right: 10px;
+        }
+        
+        .road {
+            float: left;
+            width: 1500px;
+            height: 100px;
+            border: 1px solid #999999;
+            border-right: 9px solid red;
+            margin-right: 10px;
+        }
+
+        .road img {
+            width: 120px;
+            height: 100px;
+            position: absolute;
+            left: 10px;
+
+        }
+        .user{
+            background-color: lightpink;
+        }
+
+        money {
+            text-align: center;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            var TOTAL_HORSES = 8;
+
+            class Horse {
+                code;           //말 코드번호
+                position = 0;   //현재 위치
+                rank;           //순위
+                finish = false; //도착했는지 안했는지 boolean
+
+                constructor(code) {
+                    this.code = code + 1; //1~8번 부여
+                }
+                getCode() {
+                    return this.code;
+                }
+                move() {
+                    var randomIndex = Math.floor(Math.random() * 40);  
+                    this.position += randomIndex;
+                }
+                getPosition() {
+                    return this.position;
+                }
+                setRank(rank) {
+                    this.rank = rank;
+                }
+                getRank() {
+                    return this.rank;
+                }
+                setFinish() {
+                    this.finish = true;
+                }
+                getFinish() {
+                    return this.finish;
+                }
+
+            }
+            var money = 100000; //소지금
+            $("button#start").click(function () { //start 클릭 이벤트
+                $road = $(".road");
+                var horse = []; //말 클래스를 담을 배열 선언
+                for (var i = 0; i < TOTAL_HORSES; i++) {
+                    horse.push(new Horse(i)); // 말을 배열에 담음
+                }
+                $(".user").removeClass("user");
+                var N = parseInt(prompt('말 선택 '));
+                var M = parseInt(prompt("배팅금액을 입력해주세요.(최소 10000원 이상)"));
+                while(M<10000){
+                    alert("최소금액 10000원 이상 입력해주세요")
+                    var M = parseInt(prompt("배팅금액을 입력해주세요.(최소 10000원 이상)"));
+                }
+                money -= M;
+                $("#road_" + N).addClass("user");
+
+                $('#start').hide('linear'); //start button hide
+                $('money').html('<h2>소지금 : ' + money + '원</h2>');
+                // var $horse = $('img');
+                var cnt = 0; //도착한 말 카운트
+
+                var run = setInterval(function () { //100ms당 함수호출
+                    $('.horse').each(function (index) {    //horse 클래스 each문
+                        var horsePosition = horse[index].getPosition();
+                        if (horsePosition <= 1380) { 
+                            horse[index].move(); //말의 위치 + random
+                            horsePosition = horse[index].getPosition();
+                            $("#horse_" + (index + 1)).css({
+                                left: horsePosition //이미지 위치 변경
+                            })
+                            //console.log(index + ': ' + horsePosition);
+                        } else {
+                            $("#horse_" + (index + 1)).css({
+                                left: 1380  //종료시 도착지점에 멈추기
+                            })
+                            if (horse[index].getFinish() == false) { //말이 도착했는지 판단
+                                cnt++; //도착한 말 카운트
+                                horse[index].setFinish(); //현재 말이 도착함
+                                horse[index].setRank(cnt); //현재 말의 순위 세터
+                                if (cnt == TOTAL_HORSES) { //모든 말이 들어왔는지 판단
+
+                                    clearInterval(run); // 인터버문 종료
+                                    
+                                    for (var i = 0; i < TOTAL_HORSES; i++) {
+                                        if($("#road_" + (i+1)).hasClass("user")){
+                                            console.log(horse[i].getCode() + '번 마는 : ' + horse[i].getRank() + ' 등 <-----user');
+                                            
+                                            //모든 말의 순위를 출력
+                                            console.log(horse[i].getCode() + '번 마는 : ' + horse[i].getRank() + ' 등');
+                                        }
+                                    }
+                                    var myhorse=horse[N-1].getCode();
+                                    var check=horse[N-1].getRank();
+                                    console.log("user의 말이 "+myhorse+"이고, 등수가 "+check+"가 맞나??");
+                                    switch(check){
+                                        case 1:{
+                                            alert("1등! 축하합니다");
+                                            money+=(M*2.2);
+                                            break;
+                                        }
+                                        case 2:{
+                                            alert("1등! 축하합니다");
+                                            money+=(M*2);
+                                            break;
+                                        }
+                                        case 3:{
+                                            alert("1등! 축하합니다");
+                                            money+=(M*1.6);
+                                            break;
+                                        }
+                                        case 4:{
+                                            alert("1등! 축하합니다");
+                                            money+=(M*1.3);
+                                            break;
+                                        }
+                                        case 5:{
+                                            alert("5등! 꽝");
+                                            break;
+                                        }
+                                        case 6:{
+                                            alert("6등! 꽝");
+                                            break;
+                                        }
+                                        case 7:{
+                                            alert("7등! 꽝");
+                                            break;
+                                        }
+                                        case 8:{
+                                            alert("8등! 꽝");
+                                            break;
+                                        }
+                                    }
+                                    $('money').html('<h2>소지금 : ' + money + '원</h2>');
+                                    $('#start').show(); //
+
+                                }
+                            }
+                        }
+
+
+                        //-------------------
+                    })
+                }, 100)
+                
+                
+
+
+                $("#stop").click(function () {
+                    clearInterval(run);
+                    $('#start').show();
+                })
+
+
+            })
+
+
+        })
+    </script>
+</head>
+
+<body>
+    <div class="road" id="road_1"><img class="horse" src="../img/horse.png" alt="" id="horse_1"></div>
+    <div class="road" id="road_2"><img class="horse" src="../img/horse.png" alt="" id="horse_2"></div>
+    <div class="road" id="road_3"><img class="horse" src="../img/horse.png" alt="" id="horse_3"></div>
+    <div class="road" id="road_4"><img class="horse" src="../img/horse.png" alt="" id="horse_4"></div>
+    <div class="road" id="road_5"><img class="horse" src="../img/horse.png" alt="" id="horse_5"></div>
+    <div class="road" id="road_6"><img class="horse" src="../img/horse.png" alt="" id="horse_6"></div>
+    <div class="road" id="road_7"><img class="horse" src="../img/horse.png" alt="" id="horse_7"></div>
+    <div class="road" id="road_8"><img class="horse" src="../img/horse.png" alt="" id="horse_8"></div>
+    <button id="start">시작</button>
+    <button id="stop">종료</button>
+    
+
+    <money></money>
+</body>
+
+</html>

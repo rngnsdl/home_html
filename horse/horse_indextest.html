@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-3.5.1.js"></script>
+
+    <title>The Horse Race!</title>
+    <style>
+        div.main{
+            width:1650px;
+            margin: auto;
+            border:black;
+        }
+
+        #rank {
+            width:200px;
+            height: 100px;
+            float:right;
+            border: 1px solid black;
+            background-color: white;
+            text-align: center;
+            font-size:large;
+        }
+
+        .road {
+            width: 80%;
+            height: 100px;
+            float: left;
+            border: 1px solid #999999;
+            border-right: 9px solid red;
+        }
+
+        .road img {
+            width: 120px;
+            height: 100px;
+            position: absolute;
+            left: 10px;
+
+        }
+
+        money {
+            margin:auto;
+            text-align: center;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            var cnt=1;
+            alert("•주의!!• \n•새로고침시 초기화 됩니다.•");
+            var money = 100000;
+            $("button#start").click(function () {
+
+                $('#start').hide('linear');
+                money -= 10000;
+                $('money').html('<h2>소지금 : ' + money + '원</h2>');
+                // var $horse = $('img');
+                    var x = 0;
+                    var move = setInterval(function () {
+                $('img').each(function (index) {
+                        //--------------
+
+                        console.log(index + ': ' + x);
+                        if (x < 1380) {
+                            var randomIndex = Math.floor(Math.random() * 30);
+                            x += randomIndex;
+                            $("#horse_" + (index + 1)).css({
+                                left: x //css 속성에 left,top 이 있다
+                            })
+                        } else {
+                            cnt++;
+                                $(".div_horserank"+cnt>"#rank").html(cnt+"등");
+                            if(cnt===8)clearInterval(move);
+                            $('#start').show();
+                            // var i1=$("#horse_1").x;
+                            // var i2=$("#horse_2").x;
+                            // var i3=$("#horse_3").x;
+                            // var i4=$("#horse_4").x;
+                            // var i5=$("#horse_5").x;
+                            // var i6=$("#horse_6").x;
+                            // var i7=$("#horse_7").x;
+                            // var i8=$("#horse_8").x;
+                            
+                            // var indexarray = [i1,i2,i3,i4,i5,i6,i7,i8];
+                            // console.log("첫번째 말의 인덱스: "+indexarray[0]);
+                            // var rankarray = [1,1,1,1,1,1,1,1];
+                            // for(var i=0; i<indexarray.length; i++){
+                            //     rankarray[i]=1;
+                            //     for(var j=0; j<indexarray.length; j++){
+                            //         if(indexarray[i]<indexarray[j]){
+                            //             rankarray[i]++;
+                            //         }
+                            //     }
+                            // }
+                            // for(var i=1; i<=8; i++){
+                            //     $("div_horserank"+i>"ul").html(i+"등");
+                            // }
+                            // }
+                }
+                })
+                    }, 200)
+
+
+
+                $("#stop").click(function () {
+                    clearInterval(move);
+                })
+
+
+            })
+
+
+        })
+    </script>
+</head>
+
+<body>
+    <div class="main">
+    <div class="road"><img src="../img/arabian.jpg" alt="" id="horse_1"></div>
+    <div class="div_horserank1" id=rank><ul>점수</ul></div>
+    <div class="road"><img src="../img/friesian.jpg" alt="" id="horse_2"></div>
+    <div class="div_horserank2" id=rank><ul>점수</ul></div>
+    <div class="road"><img src="../img/pegasus.jpg" alt="" id="horse_3"></div>
+    <div class="div_horserank3"id=rank><ul>점수</ul></div>
+    <div class="road"><img src="../img/quter.jpg" alt="" id="horse_4"></div>
+    <div class="div_horserank4" id=rank><ul>점수</ul></div>
+    <div class="road"><img src="../img/redhorse.jpg" alt="" id="horse_5"></div>
+    <div class="div_horserank5" id=rank><ul>점수</ul></div>
+    <div class="road"><img src="../img/waterhorse.jpg" alt="" id="horse_6"></div>
+    <div class="div_horserank6" id=rank><ul>점수</ul></div>
+    <div class="road"><img src="../img/Thoroughberd.jpg" alt="" id="horse_7"></div>
+    <div class="div_horserank7" id=rank><ul>점수</ul></div>
+    <div class="road"><img src="../img/tobiano.jpg" alt="" id="horse_8"></div>
+    <div class="div_horserank8" id=rank><ul>점수</ul></div>
+    </div>
+    <button id="start">시작</button>
+    <button id="stop">종료</button>
+    <money></money>
+
+
+</body>
+
+</html>

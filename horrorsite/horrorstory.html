@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Horror Story</title>
+</head>
+<style>
+    div{ /*이미지 링크를 가운데로 정렬하기 위해 div를 부모로 두었으며, text-align: center로 정렬시켰다.
+            이때, 이미지 자체를 block으로 만들어 margin을 적용시켰는데 이럴경우, 이미지 영역외에 마진영역 까지
+            링크가 걸리게되었다.*/
+        text-align:center;
+    }
+    body{ /*배경색깔을 검정색으로 두었다.*/
+        margin:auto;
+        background-color: black;
+    } 
+    .opening{ /*사이트 제목의 색깔과 글꼴, 글꼴크기 등을 변경시킴*/
+        color: #691919;
+        text-align:center;
+        font-style:italic;
+        font-size: 26px;
+        padding: 50px; /*제목과 이미지 사이의 간격을 두기위해 padding 적용*/
+    }
+    a:link{ /*방문 전 링크 상태*/
+        text-decoration:none;
+        color: #691919;
+    }
+    a:visited{ /*방문 후 링크 상태*/
+        text-decoration:none;
+        color: #691919;
+    }
+    .door{ /*door 이미지의 크기를 적용*/
+        width:648px;
+        height:480px;
+    }
+</style>
+<body>
+    <ul class="opening"><a href=horrorstory.html><strong>The Horror Story</strong></a></ul>\
+    <div>
+    <a href="horrorinside.html">
+        <img class="door" src=../img/horrordoor.jpg>
+    </div>
+    </a>
+</body>
+</html>
