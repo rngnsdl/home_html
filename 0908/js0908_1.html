@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var a = 5;
+        console.log(a);
+        let b = 7; //변수 선언, 2015년 (ES6) 이후에 사용하던 변수 선언
+        console.log(b);
+        const c = "7";
+        //var => let +const
+        //c = "홍길동";
+        const log = console.log;
+        log("c는 ",c);
+        log("출력 값은 ", b);
+
+        let re =[1,2,3,4,5]; //iterable 가능한 데이터를 순회 for~of문으로
+        //순회 가능한 데이터를 출력 및 가공 및 프로세싱
+
+        //for(var i=0; i<re.length; i++) log(re[i]*re[i]);
+
+        //1)함수 선언
+        function add(a,b){
+            return a+b;
+        }
+
+        //2) 함수를 값으로 사용함, 변수에 익명함수를 대입하여 나중에 호출함
+        let add1 = function(a,b){
+            return a+b;
+        }
+
+        //3)
+        let add2 = (a,b) => a*a; //화살표 함수(람다)
+
+        log(add(3,4));
+        log(add1*(5,6));
+        log(add2*(3,5));
+
+
+        //spread, unpacking 이라고 한다. 가변 변수라 함.
+
+        function sum(y,...x){
+            log("x는 ",x,"y는 ",y); //z =undefined
+        }
+        sum(1,2);
+
+        sum(1,2,3,4,5,6) //데이터가 여러개 전달됨 x에 저장됨
+
+        let re1 = [...[1,2],...[3,4,5,6]]; //데이터 쭉 펴진다(spread)
+        log(re1);
+
+        let sum1 = (a,b) => a+b;
+        let sum2 = (a,b) => a-b; //람다 함수로 정의됨
+        let sum3 = (a,b) => a*b;
+        let sum4 = (a,b) => a/b;
+
+        // let re3 = sum1(4,5);
+        // log("re3의 값은 ", re3);
+        // re3 = sum2(4,5);
+        // log("re3의 값은 ", re3);
+        // re3 = sum3(4,5);
+        // log("re3의 값은 ", re3);
+        // re3 = sum4(4,5);
+        // log("re3의 값은 ", re3);
+
+        function result2(f,x,y){ //함수정의 result2라는 함수 이름을 가진
+            //log(f,x);
+            log(f(x,y));
+
+        }// 이 함수는 3개의 파라미터(매개변수)를 받아서
+        //첫번째 파라미터는 함수를 받고
+        //두번째 파라미터는 5의 값이 x에 저장되고
+        //세번째 파라미터는 y의 값에 7이 저장됨
+        
+        //result2(sum1,5,7); // == result2((a,b) => a+b,5,7);
+        
+        var funcArray = [sum1, sum2, sum3, sum4]; //배열에 함수 저장
+
+        for(const a of funcArray){
+            log(a(14,7));
+        }
+        //함수를 배열로 전달가능 및 함수를 값으로 처리하므로 다양한 조합을 할 수 있음
+        //다양한 조합을 할 수 있음
+        
+        //map은 iterable 가능한 데이터 하나씩 꺼내서 처리함
+        //map은 입력 갯수와 출력 갯수가 동일함
+        //funcArray에서 처음값 sum1을 꺼내와서 sum1(6,7)이 호출됨
+        //여기서 i는 임수 변수로 내가 임의로 정하면 된다.
+        let result10 = [1,2,3,4].map(i=> i*i); //하나씩 꺼내와서 제곱한 결과
+        log("하나씩 꺼내와서 처리한 데이터의 결과는 ", result10);
+
+        let result9= [sum1, sum2, sum3, sum4].map(a=>a(6,7));
+        log(result9); //데이터를 하나씩 꺼내왔는데 그것이 함수이므로 호출가능
+        //호출된 결과가 배열에 저장됨
+
+        function funcTest(...f){//spread를 사용함 f에 여러개의 데이터를받음
+            log(f);
+            // for ~ of 구문으로 f에 iterable가능한 데이터 하나씩
+            // 꺼내서 a에 저장되고 a의 값을 이용하여 함수 호출 함.
+            for(const a of f) log(a(15,3));
+        }
+        funcTest(sum1, sum2, sum3, sum4, (a,b)=>a*b*7,(a,b)=>a+7);
+
+        function question(...k){
+            for(const a of k) log(a(10,1));
+        }
+
+        question(a=> a*3, a=> a*10, a=> 1*50,(a,b)=>a*b*10,(a,b)=> b+10);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+		.tab-menu {
+			list-style: none;
+			height:80px;
+		}
+		.tab-menu li {
+			width:99px;
+			height:40px;
+			background-position-y:0;
+			text-indent: -1000px;
+			overflow: hidden;
+			display: inline-block;
+			float:left;
+		}
+		.tab-menu li:hover {
+			background-position-y: -40px;
+		}
+		.tab-menu li.select {
+			background-position-y: -80px;
+			height:80px;
+		}
+		.tab-menu li.menuitem1 {
+			background-image: url(images/newbtn.bar.1.png);
+		}
+		.tab-menu li.menuitem2 {
+			background-image: url(images/newbtn.bar.2.png);
+		}
+		.tab-menu li.menuitem3 {
+			background-image: url(images/newbtn.bar.3.png);
+		}
+		.tab-menu li.menuitem4 {
+			background-image: url(images/newbtn.bar.4.png);
+		}
+		.tab-menu li.menuitem5 {
+			background-image: url(images/newbtn.bar.5.png);
+		}
+		.tab-menu li.menuitem6 {
+			background-image: url(images/newbtn.bar.6.png);
+		}
+
+	</style>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script>
+        /*
+        예제02: 함수 단위 코딩으로 만들어진 탭메뉴를 함수 방식 클래스로 만들어 주세요.
+        */
+        //this를 사용하는 이유부터 알아보자.
+        //this를 사용하는 이유는 주로 매개변수와 객체 자신이 가지고 있는 멤버면수명이 같을 경우 이를 구분하기 위해서 사용된다.
+        //this를 더 쉽게 해석하는 방법은 실행문맥 즉, 호출자가 누구냐는 것을 명시하는것과 같다.
+
+        //new 키워드로 새로운 객체를 생성했을 경우 생성자 함수 내의 this 는 new 를 통해 만들어진 새로운 변수가 된다.
+        function TabMenu(){
+            this.$tabMenu = null; //버튼 id받을것임
+            this.$menuItems = null; //버튼 id의 하위자손 태그 결정
+            this.$selectMenuItem = null; //클릭시 이미지 변경 클래스 부여
+
+        this.init= function(){ //버튼 id와 li자손을 태그하기위한 init함수
+            $tabMenu = $("tabMenu1");
+            $menuItems = $tabMenu.find("li");
+        }
+
+        this.initEvent=function(){ //클릭시 이벤트 발생함수
+            let objThis=this; //objThis 사용구간이 내부함수이기 때문에, 기본 this 사용시 전역객체에 바인딩된다. 따라서, 그것을 방지하고자 
+            $menuItems.on(click,function(){
+                objThis.setSelectItem($(this));
+            });
+            
+        }
+        }
+
+        
+
+        
+    </script>
+</head>
+<body>
+    <p>첫 번째 탭메뉴</p>
+		<ul class="tab-menu" id="tabMenu1">
+			<li class="menuitem1">google</li>
+			<li class="menuitem2">facebook</li>
+			<li class="menuitem3">pinterest</li>
+			<li class="menuitem4">twitter</li>
+			<li class="menuitem5">airbnb</li>
+			<li class="menuitem6">path</li>
+		</ul>
+</body>
+</html>

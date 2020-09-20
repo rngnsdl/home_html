@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("button").click(function(){
+                console.log($("input").val());
+            })
+            var arrFifo =[];
+            var arrLif=[];
+            $("#in_fifo").click(function(){
+                var arrFufi = [];
+                var arrLifo =[]
+                arrFifo.push($("input").val());
+            })
+
+            $("#in_lifo").click(function(){
+                arrLifo.push($("input").val());
+            })
+
+            $("#out_fifo").click(function(){
+                var result = arrFifo.shift();
+                console.log(result);
+            })
+
+            $("#out_lifo").click(function(){
+                var result = arrLifo.pop
+                console.log(result);
+            })
+        })
+    </script>
+</head>
+<body>
+    <div>
+        <label for="b">입력하세요</label>
+        <input type="text" id="b">
+        <button id="in">입력</button>
+        <button id="in_fifo">FIFO input</button>
+        <button id="in_lifo">LIFO input</button>
+    </div>
+    <div>
+        <label for="b">입력하세요</label>
+        <input type="out" id="b">
+        <button id="out">출력</button>
+        <button id="out_fifo">FIFO output</button>
+        <button id="out_lifo">LIFO output</button>
+    </div>    
+</body>
+</html>

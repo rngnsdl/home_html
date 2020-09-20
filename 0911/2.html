@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        const hummus = function(factor){
+            const ingredient = function(amount, unit, name){
+                let ingredientAmount = amount*factor;
+                if(ingredient>1){
+                    unit+="s";
+                }
+                console.log(`${ingredientAmount} ${unit} ${name}`);
+            };
+            ingredient(1,"can","chickpeas");
+            ingredient(0.25,"cup", "tahhini");
+            ingredient(0.25,"cup","lemonjuice");
+            ingredient(1,"clove","galic");
+            ingredient(2,"tablespoon","oliveoil");
+            ingredient(0.5,"teaspoon","cumin");
+        };
+        hummus(20);
+        hummus(0.5);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

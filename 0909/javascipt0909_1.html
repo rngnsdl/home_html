@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        const log = console.log; //콘솔로그 출력을 편리하게 log라는 상수에 대입해 선언한다.
+
+        function add(a,b){ //add함수 선언 
+            let result = a+b; //기능. result 지역변수 선언 result의 기능은 a와 b를 더한 값.
+            return result; // 결과값 반환
+        }
+
+        let add1 = function(a,b){ //add1 함수 선언
+            let result = a+b; // 기능은 위와 동일하다. 한가지 바뀐 점은 add1이라는 함수에 기능을 넣은것. 이 때, add1은 함수인가 전역변수 인가.
+            return result;
+        }
+
+        let add3 = (a,b) => { //add3 함수 선언, 위 함수들과 동일하다. 람다식으로 표현했을 뿐.
+            let result = a+b;
+            return result;
+        }
+
+        // 위 함수를 한 문장의 람다식으로 표현해보겠다.
+
+        let addlambda = (a,b) => a+b;
+
+        let re = 0;
+        re = add(3,5);
+        log(re);
+        re = add(6,7);
+        log(re);
+        re = add1(6,7);
+        log(re);
+        re = addlambda(1,1);
+        log(re);
+        
+        
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //합성 함수
+        // let f = (a,b) => 2*a+b;
+        // let g = (a,b) => 5*a-b;
+        
+        // console.log(f(g(4,6),7));
+
+        // let result = [1,2,3,4,5].map(i=>i*10).map(i=>i*5+7);
+        // console.log(result);
+
+        //문제
+        const log = console.log;
+        const products = [ //각각의 프로퍼티를 갖는 상수 products배열 선언.
+            {name: '반팔티 ', price: 15000},
+            {name: '긴팔티 ', price: 20000},
+            {name: '핸드폰케이스 ', price: 15000},
+            {name: '후드티 ', price: 30000},
+            {name: '바지 ', price: 25000},
+        ];
+        log(typeof products);
+        // const map = (f, iter) =>{
+        //     var arr=[];
+        //     for(const arr of f){
+        //         arr.push(f);
+        //         return arr;
+        //     }
+        // }
+        const arr =[1,2,3,4,6];
+        arr.map(f, iterable) //사용할 수 있는 이유는
+        //iterable 프로토콜(규약) 이 내장되어 제공하고 있기 때문에
+        //for ~ of 구문에 사용가능하다.
+        log(arr);
+        const map = (f, iter) =>{
+            var result=[];
+            for(const arr of iter){
+                result.push(f(arr)); //콜백이 일어나고 그 결과를 배열에 저장
+            }
+            return result;
+        }
+
+        log(map(p=>p.name, products).reduce((a,b) => a+b));
+        //여기서 products 배열이므로 배열에서 하나씩 꺼내오는데 이때, literal객체이다.
+        
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

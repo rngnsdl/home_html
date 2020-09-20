@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function outer(){
+            var i=7;
+            return function(){
+                console.log(i+9);
+                return function first(z){
+                    return i+z;
+                }
+            }
+        }
+
+        let lambda= (i) =>{
+            let j = 20;
+            return ()=>{
+                console.log(j+9);
+                return (z)=> j+z;
+            }
+        }
+
+        //outer=(i)=>()=>(z)=>i+z;
+
+        //let resultvalue = outer()()(8);
+        //console.log(resultvalue);
+
+        //console.log(outer());
+        //console.clear();
+        console.log(lambda()());
+        // console.log(lambda()()(1));
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

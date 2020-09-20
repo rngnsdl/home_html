@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        const log = console.log;
+        const iterable ={
+            [Symbol.iterator] : ()=>{
+                let step = 0;
+                const iterator_running_test ={ // 리터럴객체
+                    next:()=>{
+                        if(step<=4){
+                            step++;
+                        }
+                        switch(step){
+                            case 1:
+                                return {value: "임의의 값1", done:false}
+                            case 2:
+                                return {value: "임의의 값2", done:false}
+                            case 3:
+                                return {value: "임의의 값3", done:false}
+                            case 4:
+                                return {value: "임의의 값4", done:false}
+                            default:
+                                return {value: undefined, done:true}
+                        }
+                    }
+                };
+                return iterator_running_test; //위에서 정의한 리터럴객체 반환
+            }
+        };
+
+        for(const x of iterable) log(x);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        const log = console.log;
+        let data = [1,2,3,4,5,6,7,8,9];
+        let sum =0;
+
+        for(let element of data){
+            sum+=element;
+        }
+        log("총합은 ", sum);
+        function accumulator(...x)
+        {
+            for(let a of x) sum+= a;
+            log("총합은 ",sum);
+            log("총 갯수는 ", x.length);
+        } //함수 호출과 무관하게 정의된 함수의 수정이 없다.
+        // 함수를 사용하는 곳에 따라 라이브러리를 계속 수정해야 한다.
+        accumulator(1,2,3,4,5,6,7,11,13,...[2,3,4],...[1,2,3]);
+
+        // 배운내용 정리
+        /*  1) var(2015년 이전 자바스크립트 버전) => let, const로 변수선언 가능
+                let은 변수의 값을 변경 가능함, const는 나중에 변수의 값을 변경 불가
+            2) iterable 가능한 데이터를 for ~ of 구문으로 활용함
+            3) 함수 선언
+            3-1) 일반 함수 선언
+                function sum(a, b) { return a+b; }
+            3-2) 함수를 값으로 처리하기 위해 변수에 함수를 저장함
+                let sum = function(a,b){ return a+b; }
+            3-3) 화살표 함수를 람다 함수
+                let sum = (a,b)  =>a+b; 이렇게 하면 3-2와 동일하다
+            3-4) new Function(); 함수 객체를 만들어 사용하는것도 있다.
+            4) spread, unpack, 가변인자를 함수로 받아서 처리 및 배열의 내용을 분해(spread)함수
+
+            function tran(...a){ == 가변인자를 받을 수 있는 함수 정의
+                for(let i of a) a*3;
+            }
+            tran(1,2,3,4,5,6) 이렇게 함수의 파라미터를 여러개 전달 가능
+
+            let result = [...[12,13,15],...[12,22,11,13]] */
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

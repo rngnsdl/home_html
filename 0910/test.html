@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        const log = console.log;
+        let test = function() {
+            return function square(i){
+                return i*i;
+            }
+        }
+        // 이 함수를 호출해서 하나의 값으로 출력하라.
+        log(test()(5));
+
+        let test2 = () => (i) => (i*i);
+        log(test2(2));
+
+
+        let li ={
+            step:function(j){
+                return j*j;
+            }
+        }
+        log(li.step(3));
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

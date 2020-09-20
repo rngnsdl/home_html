@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+    let myMap = new Map()
+
+let keyString = '문자열'
+let keyObj    = {}
+let keyFunc   = function() {}
+
+// 값 설정
+myMap.set(keyString, "'문자열'과 관련된 값")
+myMap.set(keyObj, 'keyObj와 관련된 값')
+myMap.set(keyFunc, 'keyFunc와 관련된 값')
+
+myMap.size              // 3
+
+// getting the values
+myMap.get(keyString)    // "'문자열'과 관련된 값"
+myMap.get(keyObj)       // "keyObj와 관련된 값"
+myMap.get(keyFunc)      // "keyFunc와 관련된 값"
+
+console.log(myMap.get('문자열'));    // "'문자열'과 관련된 값"
+                         // keyString === '문자열'이기 때문
+myMap.get({})            // undefined, keyObj !== {}
+myMap.get(function() {}) // undefined, keyFunc !== function () {}
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

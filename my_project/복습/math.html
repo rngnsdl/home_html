@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script>
+        function sum(a,b){
+            return a+b;
+        }
+
+        function minus(a,b){
+            return a-b;
+        }
+
+        function mul(a,b){
+            return a*b;
+        }
+
+        function div(a,b){
+            return a/b;
+        }
+        $(document).ready(function(){
+            $("#sum").click(function(){
+                let first = parseInt($(".first").val());
+                let second = parseInt($(".second").val());
+                console.log("두 값을 더해: "+(sum(first,second)));
+            })
+
+            $("#minus").click(function(){
+                let first = parseInt($(".first").val());
+                let second = parseInt($(".second").val());
+                console.log("두 값을 빼: "+(minus(first,second)));
+            })
+
+            $("#mul").click(function(){
+                let first = parseInt($(".first").val());
+                let second = parseInt($(".second").val());
+                console.log("두 값을 곱해: "+(mul(first,second)));
+            })
+
+            $("#div").click(function(){
+                let first = parseInt($(".first").val());
+                let second = parseInt($(".second").val());
+                console.log("두 값을 나눠: "+(div(first,second)));
+            })
+        })
+    </script>
+</head>
+<body>
+    <ul>첫번째 파라미터는 : <input type="number" class="first"></ul>
+    <ul>두번째 파라미터는 : <input type="number" class="second"></ul>
+    <button id="sum">sum</button>
+    <button id="minus">minus</button>
+    <button id="mul">mul</button>
+    <button id="div">div</button>
+</body>
+</html>

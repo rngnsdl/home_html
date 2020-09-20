@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script>
+        //문제
+        /* 콜백 함수 활용
+        버튼을 10번 클릭하면 "완료되었습니다." 라는 메세지를
+        checkCount에서 처리하지 말고 콜백함수를 이용해 분리하라*/
+        $(document).ready(function(){
+            checkCount(showMessage);//아래 함수 호출
+        });
+
+        function checkCount(callback){
+            var count =0; //초기값
+            $("#btnStart").click(function(){
+                count++;//버튼이 눌릴때마다 count값 하나씩 증가
+                if(count>=10) 
+                    callback();
+                //count 값이 10이 되면 경고창 띄움
+            });
+        }
+
+        function showMessage(){
+            alert("완료되었습니다.")
+        }
+    </script>
+</head>
+<body>
+    <button id="btnStart">10번 클릭!</button>
+</body>
+</html>

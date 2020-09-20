@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Let's make checkbox!</title>
+    <style>
+        body{
+            font-size:8pt;
+        }
+        .d-checkbox{
+            position:relative;
+            left:100px;
+            top:100px;
+        }
+        .d-checkbox .checkbox{
+            width:20px;
+            height:15px;
+            float:left;
+            background: url("fish.jpg") no-repeat;
+        }
+        .d-checkbox .checkbox .check{
+            background: url("fish.jpg")no-repeat;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script>
+        $(document).ready(function(){
+            let bCheck=false;
+            let $checkbox = $(".d-checkbox .checkbox")
+            $(".d-checkbox").click(function(){
+                bCheck!=bCheck; //d-checkbox를 누르게되면 true로 값이 변경된다.
+                if(bCheck) $checkbox.addClass("check");
+                else $checkbox.removeClass("check");
+            })
+        })
+    </script>
+</head>
+<body>
+    <div class="d-checkbox">
+        <div class="checkbox"></div>
+        <div class="label"></div>
+            checkbox, click here!
+    </div>
+</body>
+</html>

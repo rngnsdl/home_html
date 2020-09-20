@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        const log = console.log; //상수형 변수에 대입
+        let users =[
+            {name:"홍길동", age:24, address:"영통", family:
+                {broder:23, sister:26}},
+            {name:"홍길동1", age:25, address:"영통", family:
+                {broder:25, sister:126}},
+            {name:"홍길동2", age:124, address:"영통", family:
+                {broder:27, sister:261}},
+    ]
+
+        for(var i=0; i<users.length; i++){
+            log(users[i].name);
+            log(users[i].age);
+            log(users[i].address);
+            log(users[i].family.broder);
+        }
+        //이것을 for~of 구문으로 변경하라
+        for(const a of users){
+            log(a.name, a.age, a.address, a.family.broder);
+        }
+
+        users.map(i=>i.name);
+        let result = users.filter(x =>{
+            return x.name >=24
+        });
+        let result2 = users.filter(x=>{
+            return x.family ==sister;
+        })
+        console.log(result);
+        console.log(result2);
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

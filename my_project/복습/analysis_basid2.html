@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>콜백테스트</title>
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+        //My code review
+        $(document).ready(function() { //When page loads
+            var image = $( "img" ); // set image variable  
+            var onMouseMove = function( event ){ //   //function expression
+            var mouseEvents = image.data( "mouseEvents" );// mouseEvents have value of image.data("mouseEvents"), value is array called by [event]
+                mouseEvents.push( event );//add parameter to [event]
+        	};
+ 
+             var onMouseMove = function( event ){
+                console.log("여기가 무엇이냐",event);
+                //
+                var mouseOffset = image.data( "mouseOffset" ); //mouseOffset has value of image.data("mouseOffset"), value is mouseoffset
+                console.log("뭐야", mouseOffset.left )
+                // mouseoffset has information that left and top
+                var position = { //declare position
+                    left: (event.pageX - mouseOffset.left), 
+                    top: (event.pageY - mouseOffset.top)
+                };
+                //
+                position.left =50; //set value because, where it is
+                position.top = 50; 
+                
+                var maxLeft =20; //initial value when the boundary is reached
+                var maxTop=20 
+                position.left = Math.min( position.left, maxLeft );
+                position.top = Math.min( position.top, maxTop );
+                // 
+                image.css({
+                    left: (position.left + "px"),
+                    top: (position.top + "px")
+                });
+                // 
+                var mouseEvents = image.data( "mouseEvents" );
+
+                //
+                //
+                if ((event.timeStamp - mouseEvents[ mouseEvents.length - 1 ].timeStamp ) > 40){
+                    //
+                    mouseEvents.push( event );
+                    console.log("현재 이벤트를 푸쉬합니다");
+                    // 
+                    //
+                    if (mouseEvents.length > 2){
+                        // 
+                        mouseEvents.shift();
+                        console.log("현재는 가장 오래된 것을 제거합니다.");
+                    }
+                }
+            };
+
+
+            var onMouseUp = function( event ){
+                $( document ).unbind( "mousemove mouseup" );
+              
+                image.css( "text-indent", 100 );
+                image.animate(
+                    {
+                        textIndent: 0
+                    },
+                    {
+                        duration: 100,
+                        step: function( currentStep ,a){
+                            },
+
+                    	easing:"swing"
+                    });
+
+            };
+            // 
+            image.mousedown( //run on click
+                function(evnet){ // function factor is event(mousedown)
+                    event.preventDefault();// Prevent the default action.
+                    var position = image.position();
+                    var mouseOffset = { //declare variable mouseOffset 
+                        left: (event.pageX - position.left + 1),
+                        top: (event.pageY - position.top + 1)
+                    };
+                    //
+                    //
+                    image.data( "mouseOffset", mouseOffset ); //set key, value
+
+                    //
+                    image.data( "mouseEvents", [ event ] ); //set key, value
+                    $( document ).mousemove( onMouseMove ); //call onMouseMove function then mousemove
+                    $( document ).mouseup( onMouseUp );//call onmouseUp function then mouseup
+                }
+            );
+        });
+    </script>
+</head>
+<body>
+
+    <img src="face.jpg" class="initial" />
+
+</body>
+</html>

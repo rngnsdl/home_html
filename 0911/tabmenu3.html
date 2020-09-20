@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            font-size: 9pt;
+            font-family: "굴림";
+        }
+        div,p,ul,li{
+        }
+        ul.menu{
+            padding:10px;
+            list-style: none;
+            border:1px #000 solid;
+        }
+        ul.menu li {
+            border:1px #eeeeee solid;
+            margin:10px;
+        }
+        li.select{
+            background-color: #ccc;
+        }
+    </style>
+     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script>
+        // 미션 01 -마지막 위치에 메뉴 아이템 추가 
+        // 메뉴 이름을 입력 한 후 추가버튼을 클릭 하면 
+        // 신규메뉴 아이템을 만든 후 메뉴(ul.menu)의 마지막 위치에 추가되게 만들어주세요
+        //전역 변수 선언 및 초기화
+        var $menu = null; 
+        var $menuName = null;
+        var $selectedItem =null;
+        
+        $(document).ready(function(){
+                // 안의 변수도 지역변수 
+              init();
+              initEvent();
+        });
+        //문제) 전역에서 사용할 요소 초기화  
+        function init(){ //초기화 용도 사용함
+            $menu =$("ul.menu");
+
+            //2)//$selectedItem을 전역 변수로위에서 선언하고 null값 대입
+            //위에서 전역 변수로 선언한 $menuName에 
+            // id가 menuName인 노드를찾아서 그  jquery객체를
+            //저장하세요
+            $menuName=$("#menuName") ;
+        } 
+
+        //문제2) 이벤트 초기화 함수정의및 구현하세요 
+        //함수이름은 initEvent이고 파라미터는 없으며
+        //기능은 id가 add인 노드를 찾아서 jquery 객체로 만들고
+        //jquery가 눌리면(click 이벤트 발생하면)
+        // 익명함수를 전달하고(click 메서드(함수)의파라미터가 익명함수)
+        //그 익명함수의 내부의 기능 구현은 addMenu 함수 호출하세요
+        //addMenu는 나중에 정의(만들것입니다.)
+        function initEvent(){ //이벤트 관련 내용만 모듈화 시킴
+            $("#add").click(function(){
+                addMenu();
+            });
+
+            $menu.on("click","li",(function(){//event handler =callback
+                console.log("사랑", this);
+                selectItem($(this));//홈페이지에서 우리가 클릭했을때가 바로 this. 위 26번 코드에서 해석을 해보자면,
+                                     //"click"이벤트가 발생했을때의 해당되는 "li"태그
+            })
+        //$menu jquery  객체를 담은 변수가 눌리는 이벤트 발생하면
+        //selectItem 함수 호출 =>호출시 this를 $로 감싸서(jqury함수 호출)
+        // jquery객체로 만든것을 파라미터로 전달함 
+            )
+            $("button#update").click(function(){
+                updateMenuitem();
+            })
+            $("#remove").click(function(){
+                removeMenuItem();
+            })
+        }
+
+        //문제3) addMenu 정의하세요 파라미터 없습니다
+        //메뉴 추가 처리 기능
+
+        function removeMenuItem(){
+            if($selectedItem){
+                $selectedItem.remove();
+                $selectedItem=(null);
+            }
+            else
+                alert("선택 메뉴가 존재하지 않습니다.");
+        }
+        function updateMenuitem(){
+            if($selectedItem){
+                var menuName = $menuName.val();
+                $selectedItem.html(menuName);
+            }
+            else{
+                alert("선택 메뉴가 존재하지 않습니다.");
+            }
+        }
+        function addMenu(){
+            //텍스트 입력 값 구하기
+            var menuName = $menuName.val();
+            //신규 메뉴 아이템 문자열 만들기
+            var newMenuItem = "<li>" +  menuName + "</li>";
+            //메뉴에 신규  메뉴 아이템 추가
+            $menu.append(newMenuItem);//여기 $menu로 수정
+        }
+        //1)메뉴 선택 처리
+        //함수 이름 selectItem이고 파라미터는 $item
+        //기능은 
+        function selectItem($item){
+            if($selectedItem!=null)
+                $selectedItem.removeClass("select");
+             // => 신규 선택 메뉴 아이템 처리
+            //$selectedItem에 $item 변수의 값을 저장함
+            //$selectedItem 에 접근하여 addClass메서드 호출함
+            //호출시 파라미터로는 문자열 select 전달함 
+            $selectedItem= $item;
+            $selectedItem.addClass("select");
+        }
+
+    </script>
+</head>
+<body>
+    <div>
+        <input id="menuName" type="text"/>  
+        <button id="add">
+            추가   
+        </button>
+        <button id="update">
+            수정 
+        </button>
+        <button id="remove">
+            삭제
+        </button>
+        <button id="up">
+            Up
+        </button>
+        <button id="down">
+            Down
+        </button>
+    </div>
+    <ul class="menu"></ul>
+        <li>menu1</li>
+        <li>menu2</li>
+        <li>menu3</li>
+        <li>menu4</li>
+        <li>menu5</li>
+</body>
+</html>

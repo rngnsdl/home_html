@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script>
+        const log = console.log;
+        const map = (f, iter) =>{
+            let result=[];
+            for(const a of iter){ //iterable 프로토콜
+                log(typeof f(a));// 문자열을 배열에 저장
+                result.push(f(a)); //콜백이 일어나고 그 결과를 배열 저장
+            }
+            return result;
+        }
+        $(document).ready(function(){
+            console.log($("li"));
+            console.log(map(i=>i.nodeName,$("*")));
+            //nodeNmae으로 데이터 추출하여 위에서 정의한 map을 통해 배열에 추가한다
+            //*을 하면 모든 태그 다 가져와서 위의 amp을 이용하여 배열에 추가한다.
+            //DOM(Document Object Model) 생성
+        })
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

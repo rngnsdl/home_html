@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("button").click(function(){
+                console.log($("input").val());
+            })
+            var arr =[];
+            arr.push(4);
+            arr.push(5);
+            arr.push(7);
+            var result = arr.pop();
+            console.log(result);
+            result = arr.shift();
+            console.log(result);
+            
+            $("#in").click(function(){
+                arr.push($("input").val());
+                //console.log(arr);
+            })
+
+            $("#fifo").click(function(){
+                arr.shift($("input").val());
+                //console.log(arr);
+            })
+
+            $("#lifo").click(function(){
+                arr.pop($("input").val());
+                //console.log(arr);
+            })
+        })
+    </script>
+</head>
+<body>
+    <div>
+        <label for="b">입력하세요</label>
+        <input type="text" id="b">
+        <button id="in">입력</button>
+        <button id="fifo">FIFO</button>
+        <button id="lifo">LIFO/STACK</button>
+        <hr>
+        <lable for="a">출력</lable>
+        <input type="text" id="a">
+    </div>
+</body>
+</html>

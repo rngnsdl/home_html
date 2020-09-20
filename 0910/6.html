@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        const log = console.log;
+        const products = [
+    {name: '반팔티', price: 15000},
+    {name: '긴팔티', price: 20000},
+    {name: '핸드폰케이스', price: 15000},
+    {name: '후드티', price: 30000},
+    {name: '바지', price: 25000}
+    ];
+    const map = (f,iter)=>{
+        let res =[];
+        for(const a of iter){
+            res.push(f(a));
+        }
+        return res;
+    }
+
+    const filter = (a,b) =>{
+        let empty=[];
+        for(const i of b){
+            if(a(i)) empty.push(i);
+        }
+        return empty;
+    }
+
+    log(...filter(p=>p.price>=20000,products));
+    console.clear();
+    //Reduce
+    // iter=[1,3,4,6]
+    // for(let a of iter){
+    //     let re=0;
+    //     re += a;
+    // } 
+    // reduce((a,b)=>a+b); 
+    // a+=0; //a+=1 //a+=3 //a+=4 // a+=6;
+    
+    const add = (a,b) => a+b; // 두개의 데이터를 받아서 더한 결과를 반환하는 함수
+    const reduce = (f, acc, iter) =>{
+        if(!iter){ //iter의 인자(전달값) 없을 경우
+            iter=acc[Symbol.iterator]();
+            acc=iter.next().value;
+        }
+        for(const a of iter){
+            acc = f(acc,a);
+        }
+        return acc;
+    };
+
+    log(reduce(add,0,[1,2,3,4,5]));
+    log(add(add(add(add(add(0,1),2),3),4),5));
+
+    log(
+        reduce(
+            add,
+            map(p=>p.price,
+            filter(p=>p.price<20000,products)
+        )
+    )
+    );
+    console.clear();
+    //go, pipe 공부하기
+    const args=[add,mul,sum,minus];
+    const go = (...args) => reduce((a,f)=> f(a), args);
+    go(add, mul, sum, minus)
+    const pipe = (f,...fs) => (...as) => go(f(...as), ...fs); 
+    const add1 = (a,b,c,d,f) => a+b*c+d+f;
+    go(
+        add(0,5),
+        a=>a+10,
+        a=>a+100,
+        a=>a+1000,
+        i=> i*20,
+        log
+    )
+    const mul= a => a+10;
+    const sum= a => a+100;
+    const minus= a => a*2;
+    let f = pipe(
+        add1, //7+5
+        a=> a+10, //7+5 + 10
+        a=>a+100, //7+5 +10 +100
+        a=>a*2 
+    )
+    log(f(7,5));
+    log(f(2,3,4,5,7));
+
+    /* 이 코드를 보게되면 조금 더 이해하기 쉽다.
+        pipe를 간단하게 쪼갠 후 실행되는 순서이다.*/
+    // let f = pipe(
+    //     add1,
+    //     mul,
+    //     sum,
+    //     minus,
+    //     log
+    // ) //== log(minus(sum(mul(add1(2,3,4,5,7)))))
+    /* 여기는 실행순서*/
+    //1) ==add1(2,3,4,5,7)
+    //2) ==mul(add1(2,3,4,5,7))
+    //3) ==sum(mul(add1(2,3,4,5,7)))
+    //4) ==minus(sum(mul(add1(2,3,4,5,7)))))
+    //5) ==log(minus(sum(mul(add1(2,3,4,5,7)))))
+    // </script>
+</head>
+<body>
+    
+</body>
+</html>
